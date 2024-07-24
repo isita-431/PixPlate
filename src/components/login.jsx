@@ -1,4 +1,6 @@
 import React from "react";
+import Form from 'react-bootstrap/Form';
+
 import { GoogleLogin } from "react-google-login";
 import {
   PixContainer,
@@ -24,31 +26,29 @@ const PixLogin = () => {
     <>
       <div style={{ height: "1rem", marginTop: "4rem" }}></div>
       <CenterContainer>
-        <PixContainer
-          style={{
-            marginTop: "6rem",
-          }}
-        >
+        <PixContainer style={{ width: '30%'}}>
           <PixHeading>Login</PixHeading>
-          <form>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            <div>
-              <label htmlFor="password">Password:</label>
-              <input type="password" id="password" name="password" required />
-            </div>
-            <PixButton type="submit">Login</PixButton>
-          </form>
+          <Form>
+            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label >Email address</Form.Label>
+              <Form.Control type="email" placeholder="name@example.com" />
+            </Form.Group>
+            <br/>
+            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Enter your passwprd" />
+            </Form.Group>
+          </Form>
           <PixSpan>or</PixSpan>
-          <GoogleLogin
-            clientId={CLIENT_ID}
-            buttonText="Login with Google"
-            onSuccess={handleLoginSuccess}
-            onFailure={handleLoginFailure}
-            cookiePolicy={"single_host_origin"}
-          />
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingBottom: '1.5rem'}}>
+            <GoogleLogin
+              clientId={CLIENT_ID}
+              buttonText="Login with Google"
+              onSuccess={handleLoginSuccess}
+              onFailure={handleLoginFailure}
+              cookiePolicy={"single_host_origin"}
+            />
+          </div>
           <PixSpan>
             Don't have an account? <a href="/signup">Sign up here</a>
           </PixSpan>
