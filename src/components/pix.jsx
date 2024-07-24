@@ -86,7 +86,7 @@ const PixPlate = () => {
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState(false);
   const [currentRecipe, setCurrentRecipe] = useState(0);
-  const apikey = "sk-proj-cgJlcHs99AOkLH45OEInT3BlbkFJCBwv47Nicwkwei2JqqJ2";
+  const apikey = process.env.REACT_APP_API_KEY;
 
   const handleImageClick = (item) => {
     setSelectedItems((prevSelected) =>
