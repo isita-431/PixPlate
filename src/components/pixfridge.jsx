@@ -26,11 +26,12 @@ const fileToBase64 = (file) => {
 };
 
 const openai = new OpenAI({
-  apiKey: "sk-proj-cgJlcHs99AOkLH45OEInT3BlbkFJCBwv47Nicwkwei2JqqJ2",
+  apiKey: process.env.REACT_APP_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
 const PixFridge = () => {
+  console.log(process.env.REACT_APP_API_KEY);
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [recipes, setRecipes] = useState([]);
