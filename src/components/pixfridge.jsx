@@ -31,7 +31,6 @@ const openai = new OpenAI({
 });
 
 const PixFridge = () => {
-  console.log(process.env.REACT_APP_API_KEY);
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
   const [recipes, setRecipes] = useState([]);
