@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const PixHeading = styled.h1`
   font-size: 2.5em;
   text-align: center;
-  margin-top: 100px;
-  margin-bottom: 50px;
+  padding: 1rem;
   font-family: "League Spartan";
 `;
 
