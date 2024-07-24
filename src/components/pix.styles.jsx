@@ -22,6 +22,10 @@ export const CenterContainer = styled.div`
   background-color: #f0f0f0; /* Optional: Add a background color for contrast */
 `;
 
+export const PixLoginButton = styled.a`
+  font-size: small;
+`;
+
 export const PixContainer = styled.div`
   border: 0.2px solid grey;
   border-width: thin;

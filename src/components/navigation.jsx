@@ -1,4 +1,5 @@
 import React from "react";
+import { PixLoginButton } from "./pix.styles";
 
 export const Navigation = (props) => {
   return (
@@ -20,6 +21,17 @@ export const Navigation = (props) => {
           <a className="navbar-brand page-scroll" href="#page-top">
             PIXPLATE
           </a>{" "}
+          <ul className="nav navbar-nav navbar-left">
+            <li>
+              <a
+                href="/login"
+                className="page-scroll"
+                style={{ fontWeight: "5px" }}
+              >
+                LOGIN
+              </a>
+            </li>
+          </ul>
         </div>
 
         <div
@@ -28,18 +40,18 @@ export const Navigation = (props) => {
         >
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="/#features" className="page-scroll">
-                Features
-              </a>
-            </li>
-            <li>
               <a href="/#about" className="page-scroll">
                 About
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="/#services" className="page-scroll">
                 Services
+              </a>
+            </li> */}
+            <li>
+              <a href="/#features" className="page-scroll">
+                Features
               </a>
             </li>
             {/* <li>

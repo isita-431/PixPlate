@@ -52,9 +52,9 @@ const App = () => {
             element={
               <div>
                 <Header data={landingPageData.Header} />
-                <Features data={landingPageData.Features} />
                 <About data={landingPageData.About} />
-                <Services data={landingPageData.Services} />
+                {/* <Services data={landingPageData.Services} /> */}
+                <Features data={landingPageData.Features} />
                 {/* <Team data={landingPageData.Team} /> */}
                 <Contact data={landingPageData.Contact} />
               </div>
