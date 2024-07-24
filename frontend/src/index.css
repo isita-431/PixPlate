@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  font-family: "League Spartan", sans-serif;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "League Spartan", sans-serif;
+  /* source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace; */
+}
