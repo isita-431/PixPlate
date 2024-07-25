@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Receipe = require('./recipe.modal');
 
 // User Schema
 const UserSchema = new Schema(
@@ -12,18 +13,22 @@ const UserSchema = new Schema(
       unique: true,
       dropDups: true,
     },
-
     password: {
       type: String,
       required: true,
     },
-
     email: {
       type: String,
       required: true,
       unique: true,
       dropDups: true,
     },
+    recipies: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Receipe'
+      }
+    ],
     tokens: [
       {
         token: {
