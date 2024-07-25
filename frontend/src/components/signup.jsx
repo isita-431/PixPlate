@@ -1,49 +1,87 @@
 import React from "react";
-import { PixContainer, PixHeading, CenterContainer } from "./pix.styles";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { PixSpan } from './pix.styles';
+import { useState } from "react";
+import { handleChange, handleEmailChange, handlePasswordChange } from "../utilities/handleChanges";
+import {
+  PixContainer,
+  PixHeading,
+  PixSpan,
+  CenterContainer,
+} from "./pix.styles";
+import { signup } from '../services/auth.service'
 
-const CLIENT_ID =
-  "419066637632-1idsgfddcdfn0enpoh62p8g9tvdsqjqc.apps.googleusercontent.com";
+const PixSignup = (props) => {
 
-const PixSignup = () => {
-  const handleSignupSuccess = (response) => {
-    console.log("Signup Success:", response.profileObj);
-  };
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    form: "",
+    username: ""
+  });
 
-  const handleSignupFailure = (response) => {
-    console.log("Signup Failed:", response);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (errors.email !== "" || errors.password !== "" || errors.username !== "") {
+      return;
+    }
+
+    const data = await signup(username, email, password);
+    if (!data.success) {
+      return setErrors((prev) => ({
+        ...prev,
+        form: data.message,
+      }));
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      form: "",
+    }));
+
+    props.history.push("/pix-fridge");
   };
 
   return (
-    <CenterContainer>
-    <PixContainer style={{ width: '30%'}}>
+    <>
+      <div style={{ height: "1rem", marginTop: "4rem" }}></div>
+      <CenterContainer>
+        <PixContainer style={{ width: '30%'}}>
           <PixHeading>Signup</PixHeading>
-          <Form>
-            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label >Name</Form.Label>
-              <Form.Control type="text" placeholder="Enter your name" />
+          <Form onSubmit={handleSubmit}>
+            <Form.Group size="lg" className="mb-3" controlId="username">
+              <Form.Label >Username</Form.Label>
+              <Form.Control type="username" placeholder="Enter your username" onChange={(event) => handleChange(event.target.value, setUsername)}/>
+              <div style={{color: 'red'}}>{errors.username}</div>
             </Form.Group>
             <br/>
-            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlInput2">
+            <Form.Group size="lg" className="mb-3" controlId="email">
               <Form.Label >Email address</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" />
+              <Form.Control type="email" placeholder="name@example.com" onChange={(event) => handleEmailChange(event.target.value, setEmail, setErrors)}/>
+              <div style={{color: 'red'}}>{errors.email}</div>
             </Form.Group>
             <br/>
-            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlPassword1">
+            <Form.Group size="lg" className="mb-3" controlId="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter your passwprd" />
+              <Form.Control type="password" placeholder="Enter your passwprd" 
+              onChange={(event) => handlePasswordChange(event.target.value, setPassword, setErrors)}/>
+              <div style={{color: 'red'}}>{errors.password}</div>
             </Form.Group>
-            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-              <Button variant="primary" style={{marginTop: '1rem'}}>Sign Up</Button>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', padding: '1.5rem'}}>
+              <Button variant="primary"  type="submit">Signup</Button>
             </div>
+            <div style={{color: 'red', textAlign: 'center'}}>{errors.form}</div>
           </Form>
+          <PixSpan>or</PixSpan>
           <PixSpan>
             Already have an account? <a href="/login">Login here</a>
           </PixSpan>
         </PixContainer>
-    </CenterContainer>
+      </CenterContainer>
+    </>
   );
 };
 

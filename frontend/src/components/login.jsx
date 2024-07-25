@@ -1,26 +1,48 @@
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
-import { GoogleLogin } from "react-google-login";
+import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { handleEmailChange, handlePasswordChange } from "../utilities/handleChanges";
 import {
   PixContainer,
   PixHeading,
-  PixButton,
   PixSpan,
   CenterContainer,
 } from "./pix.styles";
+import { login } from '../services/auth.service'
 
-const CLIENT_ID =
-  "419066637632-1idsgfddcdfn0enpoh62p8g9tvdsqjqc.apps.googleusercontent.com";
+const PixLogin = (props) => {
 
-const PixLogin = () => {
-  const handleLoginSuccess = (response) => {
-    console.log("Login Success:", response.profileObj);
-  };
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+    form: "",
+  });
 
-  const handleLoginFailure = (response) => {
-    console.log("Login Failed:", response);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (errors.email !== "" || errors.password !== "") {
+      return;
+    }
+
+    const data = await login(email, password);
+    if (!data.success) {
+      return setErrors((prev) => ({
+        ...prev,
+        form: data.message,
+      }));
+    }
+
+    setErrors((prev) => ({
+      ...prev,
+      form: "",
+    }));
+
+    navigate("/pix-fridge");
   };
 
   return (
@@ -29,29 +51,25 @@ const PixLogin = () => {
       <CenterContainer>
         <PixContainer style={{ width: '30%'}}>
           <PixHeading>Login</PixHeading>
-          <Form>
-            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form onSubmit={handleSubmit}>
+            <Form.Group size="lg" className="mb-3" controlId="email">
               <Form.Label >Email address</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" />
+              <Form.Control type="email" placeholder="name@example.com" onChange={(event) => handleEmailChange(event.target.value, setEmail, setErrors)}/>
+              <div style={{color: 'red'}}>{errors.email}</div>
             </Form.Group>
             <br/>
-            <Form.Group size="lg" className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Group size="lg" className="mb-3" controlId="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter your passwprd" />
+              <Form.Control type="password" placeholder="Enter your passwprd" 
+              onChange={(event) => handlePasswordChange(event.target.value, setPassword, setErrors)}/>
+              <div style={{color: 'red'}}>{errors.password}</div>
             </Form.Group>
+            <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', padding: '1.5rem'}}>
+              <Button variant="primary"  type="submit">Login</Button>
+            </div>
+            <div style={{color: 'red', textAlign: 'center'}}>{errors.form}</div>
           </Form>
           <PixSpan>or</PixSpan>
-          <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', paddingBottom: '1.5rem'}}>
-            <GoogleLogin
-              clientId={CLIENT_ID}
-              buttonText="Login with Google"
-              onSuccess={handleLoginSuccess}
-              onFailure={handleLoginFailure}
-              cookiePolicy={"single_host_origin"}
-            />
-
-            <Button variant="primary" >Sign Up</Button>
-          </div>
           <PixSpan>
             Don't have an account? <a href="/signup">Sign up here</a>
           </PixSpan>
