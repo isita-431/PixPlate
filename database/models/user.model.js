@@ -23,7 +23,7 @@ const UserSchema = new Schema(
       unique: true,
       dropDups: true,
     },
-    recipies: [
+    recipes: [
       {
         type: Schema.Types.ObjectId,
         ref: "Recipe",
@@ -68,11 +68,12 @@ UserSchema.methods.generateAuthToken = async function () {
 };
 
 // Generates a profile by removing sensitive information
-UserSchema.methods.getPublicProfile = function () {
-  const user = this.toObject();
-  delete user["password"];
-  delete user["tokens"];
-  return user;
+UserSchema.methods.getPublicProfile = async function () {
+  const user = await this.populate('recipes') // Populate recipes
+  const userObject = user.toObject(); // Convert to plain JavaScript object
+  delete userObject.password; // Remove sensitive data
+  delete userObject.tokens; // Remove sensitive data
+  return userObject;
 };
 
 UserSchema.statics.findByCredentials = async ({ email, password }) => {

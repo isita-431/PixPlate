@@ -35,4 +35,12 @@ const logout = async () => {
   });
 };
 
-export { login, signup, logout };
+const getProfile = async () => {
+  return await axiosInstance.get("user").then((response) => {
+    return response.data;
+  }).catch((error) => {
+    return error.response.data;
+  });
+}
+
+export { login, signup, logout, getProfile };

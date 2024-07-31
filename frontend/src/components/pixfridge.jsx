@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { PixHeading, PixSpan } from "./pixfridge.styles";
 import Form from "react-bootstrap/Form";
 // import Image from "react-bootstrap/Image";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import { saveRecipe, getRecipes, deleteRecipe } from "../services/receipe.service";
 import { OpenAI } from "openai";
 import {
   PixButton,
@@ -178,6 +180,46 @@ const PixFridge = () => {
     setCurrentRecipe((prev) => (prev - 1 + recipes.length) % recipes.length);
   };
 
+  const [likedRecipes, setLikedRecipes] = useState([])
+
+  useEffect(async () => {
+    const res = await getRecipes()
+    setLikedRecipes(() => {
+      return res.recipes;
+    })
+  }, [])
+
+  const handleSave = async () => {
+    await saveRecipe(recipes[currentRecipe].title, recipes[currentRecipe].ingredients, recipes[currentRecipe].description)
+    const res = await getRecipes()
+    setLikedRecipes(() => {
+      return res.recipes;
+    })
+  }
+
+  const handleDelete = async () => {
+
+    const currentRecipeTitle = recipes[currentRecipe].title;
+
+    const likedRecipe = likedRecipes.find(likedRecipe => likedRecipe && likedRecipe.title === currentRecipeTitle);
+    if (likedRecipe != null) await deleteRecipe(likedRecipe)
+
+    const res = await getRecipes()
+    setLikedRecipes(() => {
+      return res.recipes;
+    })
+  }
+
+  const isRecipeLiked = () => {
+    for(let i=0; i<likedRecipes.length; i++){
+      if(likedRecipes[i].title == recipes[currentRecipe].title) return true
+    }
+
+    return false
+  }
+
+  console.log(likedRecipes)
+
   return (
     <div>
       <PixHeading>What's in your Fridge!</PixHeading>
@@ -247,6 +289,8 @@ const PixFridge = () => {
                 <strong>Description:</strong>{" "}
                 {recipes[currentRecipe].description}
               </p>
+
+              {!isRecipeLiked() ? <IconHeart onClick={() => {handleSave()}}/> : <IconHeartFilled onClick={() => {handleDelete()}} />}
             </PixCard>
             <div>
               {currentRecipe > 0 && (

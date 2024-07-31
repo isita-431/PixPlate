@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 const http = require("http");
 const userRouter = require("./routes/user.route");
+const receipeRouter = require("./routes/recipe.route");
 // const User = require("./database/models/user.model");
 const path = require("path");
 require("dotenv").config();
@@ -28,6 +29,7 @@ app.use(express.json());
 
 //Routes
 app.use(userRouter);
+app.use(receipeRouter);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));

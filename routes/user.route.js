@@ -77,7 +77,7 @@ router.get("/user", auth, async (req, res) => {
     res.send({
       success: true,
       message: "Successfully Authenticated",
-      user: user.getPublicProfile(),
+      user: await user.getPublicProfile(),
     });
   } else {
     res.status(401).send({

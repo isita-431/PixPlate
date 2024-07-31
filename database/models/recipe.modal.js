@@ -9,7 +9,7 @@ const RecipeSchema = new Schema(
       unique: true,
       dropDups: true,
     },
-    incredients: {
+    ingredients: {
       type: String,
       required: true,
     },
