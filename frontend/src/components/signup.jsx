@@ -1,18 +1,23 @@
 import React from "react";
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import { useState } from "react";
-import { handleChange, handleEmailChange, handlePasswordChange } from "../utilities/handleChanges";
+import { useNavigate } from "react-router-dom";
+import {
+  handleChange,
+  handleEmailChange,
+  handlePasswordChange,
+} from "../utilities/handleChanges";
 import {
   PixContainer,
   PixHeading,
   PixSpan,
   CenterContainer,
 } from "./pix.styles";
-import { signup } from '../services/auth.service'
+import { signup } from "../services/auth.service";
 
 const PixSignup = (props) => {
-
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,12 +25,16 @@ const PixSignup = (props) => {
     email: "",
     password: "",
     form: "",
-    username: ""
+    username: "",
   });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (errors.email !== "" || errors.password !== "" || errors.username !== "") {
+    if (
+      errors.email !== "" ||
+      errors.password !== "" ||
+      errors.username !== ""
+    ) {
       return;
     }
 
@@ -42,38 +51,70 @@ const PixSignup = (props) => {
       form: "",
     }));
 
-    props.history.push("/pix-fridge");
+    navigate("/pix-fridge");
   };
 
   return (
     <>
       <div style={{ height: "1rem", marginTop: "4rem" }}></div>
       <CenterContainer>
-        <PixContainer style={{ width: '30%'}}>
+        <PixContainer style={{ width: "30%" }}>
           <PixHeading>Signup</PixHeading>
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" className="mb-3" controlId="username">
-              <Form.Label >Username</Form.Label>
-              <Form.Control type="username" placeholder="Enter your username" onChange={(event) => handleChange(event.target.value, setUsername)}/>
-              <div style={{color: 'red'}}>{errors.username}</div>
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type="username"
+                placeholder="Enter your username"
+                onChange={(event) =>
+                  handleChange(event.target.value, setUsername)
+                }
+              />
+              <div style={{ color: "red" }}>{errors.username}</div>
             </Form.Group>
-            <br/>
+            <br />
             <Form.Group size="lg" className="mb-3" controlId="email">
-              <Form.Label >Email address</Form.Label>
-              <Form.Control type="email" placeholder="name@example.com" onChange={(event) => handleEmailChange(event.target.value, setEmail, setErrors)}/>
-              <div style={{color: 'red'}}>{errors.email}</div>
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="name@example.com"
+                onChange={(event) =>
+                  handleEmailChange(event.target.value, setEmail, setErrors)
+                }
+              />
+              <div style={{ color: "red" }}>{errors.email}</div>
             </Form.Group>
-            <br/>
+            <br />
             <Form.Group size="lg" className="mb-3" controlId="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Enter your passwprd" 
-              onChange={(event) => handlePasswordChange(event.target.value, setPassword, setErrors)}/>
-              <div style={{color: 'red'}}>{errors.password}</div>
+              <Form.Control
+                type="password"
+                placeholder="Enter your passwprd"
+                onChange={(event) =>
+                  handlePasswordChange(
+                    event.target.value,
+                    setPassword,
+                    setErrors
+                  )
+                }
+              />
+              <div style={{ color: "red" }}>{errors.password}</div>
             </Form.Group>
-            <div style={{ display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', padding: '1.5rem'}}>
-              <Button variant="primary"  type="submit">Signup</Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                padding: "1.5rem",
+              }}
+            >
+              <Button variant="primary" type="submit">
+                Signup
+              </Button>
             </div>
-            <div style={{color: 'red', textAlign: 'center'}}>{errors.form}</div>
+            <div style={{ color: "red", textAlign: "center" }}>
+              {errors.form}
+            </div>
           </Form>
           <PixSpan>or</PixSpan>
           <PixSpan>

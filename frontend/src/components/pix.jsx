@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   PixHeading,
   PixSpan,
@@ -13,10 +13,10 @@ import {
   PixLoading,
   PixCard,
   PixArrow,
+  HeartIcon,
 } from "./pix.styles";
 import { OpenAI } from "openai";
 
-// Import all images from a directory
 const importAll = (r) =>
   r.keys().map((item, index) => ({
     id: index,
@@ -86,7 +86,15 @@ const PixPlate = () => {
   const [loading, setLoading] = useState(false);
   const [popup, setPopup] = useState(false);
   const [currentRecipe, setCurrentRecipe] = useState(0);
+  const [favorite, setFavorite] = useState(false);
   const apikey = process.env.REACT_APP_API_KEY;
+  const recipesRef = useRef(null);
+
+  useEffect(() => {
+    if (!loading && recipes.length > 0) {
+      recipesRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [loading, recipes]);
 
   const handleImageClick = (item) => {
     setSelectedItems((prevSelected) =>
@@ -138,10 +146,8 @@ const PixPlate = () => {
 
       console.log("Raw recipe text:", recipeText);
 
-      // Split recipes by two empty lines
       const recipeBlocks = recipeText.trim().split(/\n\s*\n\s*\n/);
 
-      // Map recipe blocks to objects
       const recipesArray = recipeBlocks.map((block) => {
         const lines = block
           .trim()
@@ -183,6 +189,11 @@ const PixPlate = () => {
 
   const handleNextRecipe = () => {
     setCurrentRecipe((prev) => (prev + 1) % recipes.length);
+    setFavorite(false);
+  };
+
+  const handleFavoriteClick = () => {
+    setFavorite((prev) => !prev);
   };
 
   const renderImageGrid = (images, category) => (
@@ -226,6 +237,7 @@ const PixPlate = () => {
         {renderImageGrid(nutsImages, "Nuts and Seeds")}
         <PixButton onClick={handleGenerate}>Generate</PixButton>
       </PixContainer>
+      <br></br>
       {popup && <PixPopup>Please select items</PixPopup>}
       {loading && (
         <PixLoading>
@@ -235,7 +247,7 @@ const PixPlate = () => {
         </PixLoading>
       )}
       {recipes.length > 0 && !loading && (
-        <div>
+        <div ref={recipesRef}>
           <h2>Recipe Suggestions</h2>
           <PixCard>
             <h3>{recipes[currentRecipe].title}</h3>
@@ -245,6 +257,12 @@ const PixPlate = () => {
             <p>
               <strong>Description:</strong> {recipes[currentRecipe].description}
             </p>
+            <HeartIcon
+              onClick={handleFavoriteClick}
+              style={{ color: favorite ? "red" : "grey" }}
+            >
+              ♥
+            </HeartIcon>
           </PixCard>
           <PixArrow onClick={handleNextRecipe}>→</PixArrow>
         </div>

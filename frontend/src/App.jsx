@@ -4,7 +4,7 @@ import { Navigation } from "./components/navigation";
 import { Header } from "./components/header";
 import { Features } from "./components/features";
 import { About } from "./components/about";
-import { Services } from "./components/services";
+// import { Services } from "./components/services";
 import { Contact } from "./components/contact";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
@@ -13,7 +13,7 @@ import PixFridge from "./components/pixfridge";
 import PixLogin from "./components/login";
 import "./App.css";
 import PixSignup from "./components/signup";
-import PrivateRoute from './routes/PrivateRoute';
+import PrivateRoute from "./routes/PrivateRoute";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -38,7 +38,7 @@ const App = () => {
                 <Header data={landingPageData.Header} />
                 <Features data={landingPageData.Features} />
                 <About data={landingPageData.About} />
-                <Services data={landingPageData.Services} />
+                {/* <Services data={landingPageData.Services} /> */}
                 {/* <Team data={landingPageData.Team} /> */}
                 <Contact data={landingPageData.Contact} />
               </div>
@@ -54,11 +54,19 @@ const App = () => {
           />
           <Route
             path="/pix"
-            element={<PrivateRoute element={<PixPlate data={landingPageData.Playground} />} />}
+            element={
+              <PrivateRoute
+                element={<PixPlate data={landingPageData.Playground} />}
+              />
+            }
           />
           <Route
             path="/pix-fridge"
-            element={<PrivateRoute element={<PixFridge data={landingPageData.Playground} />} />}
+            element={
+              <PrivateRoute
+                element={<PixFridge data={landingPageData.Playground} />}
+              />
+            }
           />
         </Routes>
       </div>

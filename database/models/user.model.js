@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Receipe = require('./recipe.modal');
+const Recipe = require("./recipe.modal");
 
 // User Schema
 const UserSchema = new Schema(
@@ -26,8 +26,8 @@ const UserSchema = new Schema(
     recipies: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Receipe'
-      }
+        ref: "Recipe",
+      },
     ],
     tokens: [
       {
@@ -35,7 +35,7 @@ const UserSchema = new Schema(
           type: String,
         },
       },
-    ]
+    ],
   },
   {
     timestamps: true,

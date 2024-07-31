@@ -117,3 +117,14 @@ export const PixArrow = styled.button`
   cursor: pointer;
   margin-top: 10px;
 `;
+
+export const HeartIcon = styled.div`
+  font-size: 24px;
+  cursor: pointer;
+  user-select: none;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: red;
+  }
+`;

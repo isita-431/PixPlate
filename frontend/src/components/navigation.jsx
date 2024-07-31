@@ -20,6 +20,26 @@ export const Navigation = (props) => {
           <a className="navbar-brand page-scroll" href="#page-top">
             PIXPLATE
           </a>{" "}
+          <ul className="nav navbar-nav navbar-left">
+            <li>
+              <a
+                href="/login"
+                className="page-scroll"
+                style={{ fontWeight: "5px" }}
+              >
+                LOGIN
+              </a>
+            </li>
+            <li>
+              <a
+                href="/profile"
+                className="page-scroll"
+                style={{ fontWeight: "5px" }}
+              >
+                PROFILE
+              </a>
+            </li>
+          </ul>
         </div>
 
         <div
@@ -37,11 +57,11 @@ export const Navigation = (props) => {
                 About
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="/#services" className="page-scroll">
                 Services
               </a>
-            </li>
+            </li> */}
             {/* <li>
               <a href="/#team" className="page-scroll">
                 Team

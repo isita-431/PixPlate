@@ -4,7 +4,7 @@
     "paragraph": "Unleash your inner Chef"
   },
   "About": {
-    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "paragraph": "Discover an innovative app that offers personalized recipes tailored to your dietary needs and health conditions. Simply select your favorite products or take a photo of your fridge, and our smart technology will do the rest. Enjoy custom recipe recommendations based on what you have at home and the recipes you love. Easy to use and built with you in mind, this app ensures delicious and healthy meals every time. Explore now and let us help you create culinary magic from the comfort of your kitchen!",
     "Why": [
       "Lorem ipsum dolor",
       "Tempor incididunt",
@@ -162,23 +162,23 @@
   "Features": [
     {
       "icon": "fa fa-comments-o",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "title": "Personalized Recipes",
+      "text": "Get custom recipes tailored to your dietary needs and preferences."
     },
     {
-      "icon": "fa fa-bullhorn",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "icon": "fa fa-search",
+      "title": "Fridge Photo Detection",
+      "text": "Take a photo of your fridge, and our smart technology identifies the ingredients for you."
     },
     {
-      "icon": "fa fa-group",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "icon": "fa fa-heart",
+      "title": "Favorite Recipes",
+      "text": "Save your favorite recipes and receive new recommendations based on what you love."
     },
     {
       "icon": "fa fa-magic",
-      "title": "Lorem ipsum",
-      "text": "Lorem ipsum dolor sit amet placerat facilisis felis mi in tempus eleifend pellentesque natoque etiam."
+      "title": "Easy-to-Use Interface",
+      "text": "Enjoy a seamless experience with our user-friendly design, making meal planning simple and fun."
     }
   ],
   "Playground": [],
