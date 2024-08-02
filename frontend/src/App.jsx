@@ -14,6 +14,7 @@ import PixLogin from "./components/login";
 import "./App.css";
 import PixSignup from "./components/signup";
 import PrivateRoute from "./routes/PrivateRoute";
+import { Profile } from "./components/profile";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -65,6 +66,14 @@ const App = () => {
             element={
               <PrivateRoute
                 element={<PixFridge data={landingPageData.Playground} />}
+              />
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute
+                element={<Profile data={landingPageData.Playground} />}
               />
             }
           />

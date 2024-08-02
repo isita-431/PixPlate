@@ -16,6 +16,12 @@ import {
   HeartIcon,
 } from "./pix.styles";
 import { OpenAI } from "openai";
+import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
+import {
+  saveRecipe,
+  getRecipes,
+  deleteRecipe,
+} from "../services/receipe.service";
 
 const importAll = (r) =>
   r.keys().map((item, index) => ({
@@ -189,11 +195,55 @@ const PixPlate = () => {
 
   const handleNextRecipe = () => {
     setCurrentRecipe((prev) => (prev + 1) % recipes.length);
-    setFavorite(false);
   };
 
-  const handleFavoriteClick = () => {
-    setFavorite((prev) => !prev);
+  const handlePrevRecipe = () => {
+    setCurrentRecipe((prev) => (prev - 1 + recipes.length) % recipes.length);
+  };
+
+  // const handleFavoriteClick = () => {
+  //   setFavorite((prev) => !prev);
+  // };
+  const [likedRecipes, setLikedRecipes] = useState([]);
+  useEffect(async () => {
+    const res = await getRecipes();
+    setLikedRecipes(() => {
+      return res.recipes;
+    });
+  }, []);
+
+  const handleSave = async () => {
+    await saveRecipe(
+      recipes[currentRecipe].title,
+      recipes[currentRecipe].ingredients,
+      recipes[currentRecipe].description
+    );
+    const res = await getRecipes();
+    setLikedRecipes(() => {
+      return res.recipes;
+    });
+  };
+
+  const handleDelete = async () => {
+    const currentRecipeTitle = recipes[currentRecipe].title;
+
+    const likedRecipe = likedRecipes.find(
+      (likedRecipe) => likedRecipe && likedRecipe.title === currentRecipeTitle
+    );
+    if (likedRecipe != null) await deleteRecipe(likedRecipe);
+
+    const res = await getRecipes();
+    setLikedRecipes(() => {
+      return res.recipes;
+    });
+  };
+
+  const isRecipeLiked = () => {
+    for (let i = 0; i < likedRecipes.length; i++) {
+      if (likedRecipes[i].title == recipes[currentRecipe].title) return true;
+    }
+
+    return false;
   };
 
   const renderImageGrid = (images, category) => (
@@ -218,6 +268,8 @@ const PixPlate = () => {
       </PixGrid>
     </>
   );
+
+  console.log(likedRecipes);
 
   return (
     <div>
@@ -257,14 +309,28 @@ const PixPlate = () => {
             <p>
               <strong>Description:</strong> {recipes[currentRecipe].description}
             </p>
-            <HeartIcon
-              onClick={handleFavoriteClick}
-              style={{ color: favorite ? "red" : "grey" }}
-            >
-              ♥
-            </HeartIcon>
+            {!isRecipeLiked() ? (
+              <IconHeart
+                onClick={() => {
+                  handleSave();
+                }}
+              />
+            ) : (
+              <IconHeartFilled
+                onClick={() => {
+                  handleDelete();
+                }}
+              />
+            )}
           </PixCard>
-          <PixArrow onClick={handleNextRecipe}>→</PixArrow>
+          <div>
+            {currentRecipe > 0 && (
+              <PixArrow onClick={handlePrevRecipe}>←</PixArrow>
+            )}
+            {currentRecipe < recipes.length - 1 && (
+              <PixArrow onClick={handleNextRecipe}>→</PixArrow>
+            )}
+          </div>
         </div>
       )}
     </div>
