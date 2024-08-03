@@ -1,15 +1,4 @@
 # welcome to PixPlate - Your favourite recipe recommender
-PixPlate - Instruction Journal
-
-Installing the dependencies
-Run the following command in the root of the project to install the packages on the server side:
-
-To install node modules - npm i
-
-To run the react app  - first cd frontend
-                      - npm start
-To run the backend server : nodemon app
-
 ---
 
 ## PixPlate - Instruction Journal
