@@ -34,6 +34,9 @@ nodemon app
 ---
 
 ### App Demo
+This App demo will help users traverse the app. 
+#### Main Page
+![PixPlate Main Page](frontend/public/img/demo/home_screen.png)
 
 
 
