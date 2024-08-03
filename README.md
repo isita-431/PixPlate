@@ -51,13 +51,13 @@ Users can upload pictures of their fridge and get recipe recommendations based o
 
 Here's the video demo:
 
-[PIXFRIDGE video demo](frontend/public/img/demo/PixFridge_demo.mp4)
+[PIXFRIDGE video demo](frontend/public/img/demo/PixPlate_demo1 (2).gif)
 
 #### PIXPLATE:
 A fun place where users can select ingredients and click generate to get personalized recipes. Users can like the recipes and it will be further added into the liked recipes section of their profile. 
 
 Here's the video demo:
 
-[PIXPLATE video demo](frontend/public/img/demo/PixPlate_demo.mp4)
+[PIXPLATE video demo](frontend/public/img/demo/PixPlate_demo1 (1).gif)
 
 
