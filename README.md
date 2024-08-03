@@ -47,7 +47,7 @@ Users will have to login or create an account before trying to access "PIXPLATE"
 #### WHAT'S IN YOUR FRIDGE:
 Users can upload pictures of their fridge and get recipe recommendations based on the items discovered in the fridge. Users can also provide additional information on their health conditions, cuisine etc.. to get much better recipe recommendations. Users can like the recipes and it will be further added into the liked recipes section of their profile. 
 
-[PIXFRIDGE Page](frontend/public/img/demo/PixFridge_demo.jpg)
+![PIXFRIDGE Page](frontend/public/img/demo/PixFridge_demo.jpg)
 
 Here's the video demo:
 
