@@ -39,4 +39,25 @@ This App demo will help users traverse the app.
 ![PixPlate Main Page](frontend/public/img/demo/home_screen.png)
 
 
+#### Login Page
+Users will have to login or create an account before trying to access "PIXPLATE" and "WHAT'S IN YOUR PLATE" features.  
+![LOGIN Page](frontend/public/img/demo/login_page.png)
+
+
+#### WHAT'S IN YOUR FRIDGE:
+Users can upload pictures of their fridge and get recipe recommendations based on the items discovered in the fridge. Users can also provide additional information on their health conditions, cuisine etc.. to get much better recipe recommendations. Users can like the recipes and it will be further added into the liked recipes section of their profile. 
+
+[PIXFRIDGE Page](frontend/public/img/demo/PixFridge_demo.png)
+
+Here's the video demo:
+
+[PIXFRIDGE video demo](frontend/public/img/demo/PixFridge_demo.mp4)
+
+#### PIXPLATE:
+A fun place where users can select ingredients and click generate to get personalized recipes. Users can like the recipes and it will be further added into the liked recipes section of their profile. 
+
+Here's the video demo:
+
+[PIXPLATE video demo](frontend/public/img/demo/PixPlate_demo.mp4)
+
 
